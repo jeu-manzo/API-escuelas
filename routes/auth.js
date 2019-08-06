@@ -11,6 +11,11 @@ router.post('/register', async (req, res) => {
   //validate before saving
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send({
+    error: {
+      message: error.details[0].message
+    }
+  });
 
   //check if user already is in db
   const emailExist = await User.findOne({email: req.body.email});
@@ -51,7 +56,7 @@ router.post('/login', async (req,res) => {
 
   //Create and assign token
   const token = jwt.sign({_id: user._id}, config.SECRET_TOKEN);
-  res.header('auth-token', token).send(token);
+  res.header('auth-token', token).send({ token });
 })
 
 module.exports = router;
