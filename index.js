@@ -22,15 +22,15 @@ require("./models/schools");
 //Import Routes
 const authRoute = require('./routes/auth');
 const reviewsAuth = require('./routes/reviews');
-const reviewSchoolsRouter = require("./routes/reviewSchools");
-const schools = require("./routes/schools");
+const reviewSchools = require("./routes/reviewSchoolsRouter");
+const schools = require("./routes/schoolsRouter");
 
 //Middleware
 app.use(express.json());
 //Routes Middlewares
 app.use('/api/user', authRoute);
 app.use('/api/reviews', reviewsAuth);
-app.use('/api/reviewsSchools',reviewSchoolsRouter);
+app.use('/api/reviewsSchools',reviewSchools);
 app.use('/api/schools', schools);
 
 app.listen(config.port, () => console.log("Server running..."))
