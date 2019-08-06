@@ -3,6 +3,8 @@ mongoose.promise = global.Promise;
 var exports = module.exports = {};
 
 const reviewSchema = new mongoose.Schema({
+    schoolId:String, // school's _id
+    schoolGoogleId:String,
     userId:String,
     adminScore:Number,
     extracurricularScore:Number,
@@ -18,14 +20,25 @@ const reviewSchema = new mongoose.Schema({
     textComment:String
     })
     
+const newsSchema = new mongoose.Schema({
+    schoolId:String, // school's _id
+    schoolGoogleId:String,
+    title:String,
+    link: String,
+    text:String,
+    img:String 
+})
+    
 
 const schoolSchema =  new mongoose.Schema({
     googleId:String,
     name:String,
-    reviews: [reviewSchema],
-    lastSearch: Date
+    score:Number,
+    lastSearch: Date,
 }) 
 
+
+exports.news = mongoose.model("News", newsSchema);
 
 exports.review = mongoose.model("Review", reviewSchema);
 
